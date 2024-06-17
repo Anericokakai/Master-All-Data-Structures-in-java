@@ -2,14 +2,13 @@ package com.d3f4ult.coinProblems;
 
 public class MinimumCoins {
     public static void main(String[] args) {
- var res=findMinCoin(11,new int[]{1,2,5});
+ var res=findMinCoin(13,new int[]{1,4,5});
         System.out.println(res);
 
     }
     static  int findMin_ingoreNull(int a,int b){
         if(a==0) return b;
         if(b==0)return  a;
-        System.out.println( "Min max solurion = "+Math.min(a,b));
         return Math.min(a,b);
     }
    static int findMinCoin(int amount,int [] coins){
