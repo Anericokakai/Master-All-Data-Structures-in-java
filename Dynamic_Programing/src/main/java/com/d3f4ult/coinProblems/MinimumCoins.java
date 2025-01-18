@@ -7,11 +7,11 @@ public class MinimumCoins {
     public  static HashMap<Integer,Integer> cache= new HashMap<>();
     public static void main(String[] args) {
         int amount=11;
-        int []coins= new int[] {3,1,2};
+        int []coins= new int[] {5,1,2};
         int n=0;
         int []ds= new int [coins.length];
         int sum=0;
- var res=findMinCoin(amount,coins,n,ds,sum);
+ var res=findMinCoin(amount,coins);
         System.out.println(res);
 
     }
@@ -23,37 +23,29 @@ public class MinimumCoins {
         return Math.min(a,b);
 
     }
-   static int findMinCoin(int amount,int [] coins,int n,int []ds,int sum){
-        int res=0;
+   static int findMinCoin(int amount,int [] coins){
 
-if(n>=coins.length){
-    System.out.println(Arrays.toString(ds));
-    System.out.println(sum);
-    return 0 ;
+int []dp=new int[amount+1];
+Arrays.fill(dp,Integer.MAX_VALUE);
+dp[0]=0;
+
+for(int i=0;i<=amount;i++){
+    for (int coin : coins){
+        var subProblem= i-coin;
+        if(subProblem>=0){
+            int min = Math.min(dp[i], 1 + dp[subProblem]);
+
+            dp[i]= min;
+
+        }
+
+
+    }
+
 }
-        if(amount==0){
-          return   0;
-        }
-        if(sum==amount){
-            System.out.println(Arrays.toString(ds));
 
-            return ds.length;
-        }
-        ds[n]=coins[n];
-        sum+=coins[n];
-        findMinCoin(amount,coins,n+1,ds,sum);
-        ds[n]=0;
-        sum-=coins[n];
- findMinCoin(amount,coins,n+1,ds,sum);
+return  dp[amount];
 
-
-
-
-
-
-
-
-return res;
     }
 
 }
